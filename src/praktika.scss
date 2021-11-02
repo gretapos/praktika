@@ -3,7 +3,7 @@
 }
 
 .product {
-    background-color: steelblue;
+    background-color: lightgray;
     min-width: 100vw;
     min-height: 100vh;
     position: relative;
@@ -12,49 +12,43 @@
         justify-content: space-between;
         align-items: flex-start;
         flex-wrap: wrap;
-        padding: 10px;
-        &__product {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 5px;
-            border: 3px solid ghostwhite;
-            border-radius: 3px;
+        padding: 20px;
+        background-color: whitesmoke;
+        &__table {
             width: 100%;
-            max-width: 200px;
-            min-width: 140px;
-            box-sizing: border-box;
-            margin: 10px;
-            &__name {
-                color: ghostwhite;
-                font-size: 30px;
-                text-align: center;
-                padding: 0 0 0 0;
-            }
-            &__type {
-                color: yellow;
-                font-size: 20px;
-                text-align: center;
-                padding: 0 0 20px 0;
-            }
-            &__stats {
-                display: flex;
-                justify-content: flex-start;
-                align-items: flex-start;
-                flex-direction: column;
-                color: paleturquoise;
-                font-size: 16px;
-                text-align: center;
-                padding: 0 0 20px 0;
-                width: 100%;
-                span {
-                    i {
-                        font-size: 14px;
-                        color: lightcoral;
-                        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-align: left;
+            button{
+                border: 0;
+                padding: 5px 20px;
+                border-radius: 3px;
+                color: white;
+                &.editButton{
+                    background-color: lightsteelblue;
+                    &:hover{
+                        background-color: lightskyblue;
+                    }
+                    
+                }
+                &.deleteButton{
+                    background-color: red;
+                    &:hover{
+                        background-color: lightcoral;
                     }
                 }
+            }
+        }
+    }
+    .buttonsBlock {
+        padding: 20px;
+        button{
+            background-color: lightseagreen;
+            border: 0;
+            padding: 10px 30px;
+            border-radius: 3px;
+            color: white;
+            font-size: 15px;
+            &:hover{
+                background-color: seagreen;
             }
         }
     }
@@ -62,7 +56,7 @@
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
-        background: paleturquoise;
+        background: lightsteelblue;
         box-sizing: border-box;
         flex-wrap: wrap;
         padding-bottom: 5px;
@@ -71,7 +65,7 @@
             margin-bottom: 0;
             text-align: center;
             font-size: 22px;
-            color: lightcoral;
+            color: white;
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
         }
         &__input {
@@ -101,7 +95,7 @@
         left: 10vw;
         // width: 90%;
         top: 0;
-        background-color: paleturquoise;
+        background-color: lightseagreen;
         border: 3px solid white;
         box-shadow: 2px 2px 2px gray;
         .product__form__input {

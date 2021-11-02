@@ -1,16 +1,15 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Create from "./Components/Create";
+import CreateModal from "./Components/CreateModal";
 import ProductsList from "./Components/ProductsList";
 import Modal from "./Components/Modal";
 
 function App() {
-
-
     const [products, setProducts] = useState([]);
     const [lastUpdate, setLastUpdate] = useState(Date.now())
     const [showModal, setShowModal] = useState(false)
+    const [showCreateModal, setShowCreateModal] = useState(false)
     const [modalProduct, setModalProduct] = useState({
       product: '',
       quantity: '',
@@ -18,7 +17,6 @@ function App() {
       in_stock: '',
       last_order: ''
     })
-
 
     useEffect(() => {
         axios.get('http://localhost:3003/juvelyrika')
@@ -29,6 +27,7 @@ function App() {
     }, [lastUpdate])
 
     const create = product => {
+      setShowCreateModal(false);
         axios.post('http://localhost:3003/juvelyrika', product)
             .then(res => {
                 console.log(res.data);
@@ -54,7 +53,6 @@ function App() {
             })
     }
 
-
     const modal = (product) => {
         setShowModal(true);
         setModalProduct(product);
@@ -64,11 +62,22 @@ function App() {
         setShowModal(false);
     }
 
+    const hideCreateModal = () => {
+      setShowCreateModal(false);
+  }
+
+    const createModal = () => {
+      setShowCreateModal(true)
+  }
+
     return (
         <div className="product">
-            <Create create={create}></Create>
-            <ProductsList products={products} modal={modal}></ProductsList>
-            <Modal edit={edit} remove={remove} hide={hide} product={modalProduct} showModal={showModal}></Modal>
+            <ProductsList products={products} modal={modal} remove={remove}></ProductsList>
+            <Modal edit={edit} hide={hide} product={modalProduct} showModal={showModal}></Modal>
+            <CreateModal create={create} hide={hideCreateModal} showModal={showCreateModal}></CreateModal>
+            <div className="buttonsBlock">
+              <button onClick={createModal}>Add</button>
+            </div>
         </div>
     )
 }

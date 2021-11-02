@@ -1,38 +1,29 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function Modal({showModal, hide, product, edit}) {
+function CreateModal({showModal, hide, create}) {
     const [inputs, setInputs] = useState({
         product: '',
         quantity: '',
         price: '',
-        in_stock: 0,
+        in_stock: 1,
         last_order: ''
     })
-
-    useEffect(() => {
-        setInputs({
-            product: product.product,
-            quantity: product.quantity,
-            price: product.price,
-            in_stock: product.in_stock,
-            last_order: product.last_order.slice(0,10)
-        })
-    },[product])
-
-    const handleEdit = () => {
-        edit({
-            product: inputs.product,
-            quantity: inputs.quantity,
-            price: inputs.price,
-            in_stock: inputs.in_stock,
-            last_order: inputs.last_order
-        }, product.id)
-    }
 
     const formControl = (e, what) => {
         const inputsCopy = { ...inputs };
         inputsCopy[what] = e.target.value;
         setInputs(inputsCopy);
+    }
+
+    const handleCreate = () => {
+        create(inputs);
+        setInputs({
+            product: '',
+            quantity: '',
+            price: '',
+            in_stock: 1,
+            last_order: ''
+        });
     }
 
     return (
@@ -41,7 +32,7 @@ function Modal({showModal, hide, product, edit}) {
             top: window.scrollY + 100 + 'px'
             }}>
             <div className="product__form">
-                <h2>Edit product</h2>
+                <h2>Add product</h2>
                 <div className="product__form__input">
                     <span>Product</span>
                     <input type="text" value={inputs.product} onChange={(e) => formControl(e, 'product')} />
@@ -64,7 +55,7 @@ function Modal({showModal, hide, product, edit}) {
                     <input type="date" value={inputs.last_order} onChange={(e) => formControl(e, 'last_order')} />
                 </div>
                 <div className="product__form__input__buttons">
-                    <button onClick={handleEdit}>Save</button>
+                    <button onClick={handleCreate}>Add</button>
                     <button onClick={hide}>Cancel</button>
                 </div>
             </div>
@@ -72,4 +63,4 @@ function Modal({showModal, hide, product, edit}) {
     )
 }
 
-export default Modal;
+export default CreateModal;

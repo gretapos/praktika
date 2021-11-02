@@ -1,18 +1,26 @@
-function Product ({product, modal}) {
+function Product ({product, modal, remove}) {
 
-    const  showEdit = () => {
+    const showEditModal = () => {
         modal(product)
     }
 
+    const removeProduct = () => {
+        remove(product.id)
+    }
+
     return (
-        <div className="product">
-            <div className="product__name">{product.product}</div>
-            <div className="product__quantity">{product.quantity}</div>
-            <div className="product__price">{product.price}</div>
-            <div className="product__in_stock">{product.in_stock}</div>
-            <div className="product__last_order">{new Date(product.last_order).getFullYear()}</div>
-            <button onClick={showEdit}>Edit</button>
-        </div>
+        <tr>
+            <td>{product.product}</td>
+            <td>{product.quantity}</td>
+            <td>{product.price}</td>
+            <td>{product.price * product.quantity}</td>
+            <td>{parseInt(product.in_stock) ? 'Yes' : 'No'}</td>
+            <td>{new Date(product.last_order).getFullYear()}</td>
+            <td>
+                <button onClick={showEditModal} className="editButton">Edit</button>&nbsp;
+                <button onClick={removeProduct} className="deleteButton">Delete</button>
+            </td>
+        </tr>
     )
 }
 
