@@ -15,7 +15,7 @@ function Product ({product, modal, remove}) {
             <td>{product.price}</td>
             <td>{product.price * product.quantity}</td>
             <td>{parseInt(product.in_stock) ? 'Yes' : 'No'}</td>
-            <td>{new Date(product.last_order).getFullYear()}</td>
+            <td>{new Date(product.last_order).toISOString().split('T')[0]}</td>
             <td>
                 <button onClick={showEditModal} className="editButton">Edit</button>&nbsp;
                 <button onClick={removeProduct} className="deleteButton">Delete</button>
