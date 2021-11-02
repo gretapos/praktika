@@ -13,10 +13,12 @@
         align-items: flex-start;
         flex-wrap: wrap;
         padding: 20px;
-        background-color: whitesmoke;
+        overflow-x:auto;
         &__table {
             width: 100%;
             text-align: left;
+            background-color: whitesmoke;
+            padding: 10px;
             button{
                 border: 0;
                 padding: 5px 20px;
