@@ -3,7 +3,9 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import CreateModal from "./Components/CreateModal";
 import ProductsList from "./Components/ProductsList";
+import ProductNav from "./Components/ProductNav";
 import Modal from "./Components/Modal";
+import productSort from "./Components/productSort";
 
 function App() {
     const [products, setProducts] = useState([]);
@@ -19,7 +21,7 @@ function App() {
     })
 
     useEffect(() => {
-        axios.get('http://localhost:3003/juvelyrika')
+        axios.get('http://localhost:3001/juvelyrika')
             .then(res => {
                 setProducts(res.data);
                 console.log(res.data);
@@ -28,7 +30,7 @@ function App() {
 
     const create = product => {
       setShowCreateModal(false);
-        axios.post('http://localhost:3003/juvelyrika', product)
+        axios.post('http://localhost:3001/juvelyrika', product)
             .then(res => {
                 console.log(res.data);
                 setLastUpdate(Date.now());
@@ -37,7 +39,7 @@ function App() {
 
     const edit = (product, id) => {
         setShowModal(false);
-        axios.put('http://localhost:3003/juvelyrika/'+id, product)
+        axios.put('http://localhost:3001/juvelyrika/'+id, product)
             .then(res => {
                 console.log(res.data);
                 setLastUpdate(Date.now());
@@ -46,7 +48,7 @@ function App() {
 
     const remove = (id) => {
         setShowModal(false);
-        axios.delete('http://localhost:3003/juvelyrika/'+id)
+        axios.delete('http://localhost:3001/juvelyrika/'+id)
             .then(res => {
                 console.log(res.data);
                 setLastUpdate(Date.now());
@@ -69,9 +71,59 @@ function App() {
     const createModal = () => {
       setShowCreateModal(true)
   }
+    const [types, setTypes] = useState([])
+    const [filterBy, setFilterBy] = useState('')
+    const [searchBy, setSearchBy] = useState('')
+    const [sortBy, setSortBy] = useState('')
+
+    useEffect(() => {
+        axios.get('http://localhost:3003/juvelyrika-product')
+            .then(res => {
+                setTypes(res.data);
+            })
+    }, [lastUpdate])
+
+    
+    useEffect(() => {
+        if (sortBy) {
+            setProducts(productSort(products, sortBy));
+        }
+    }, [sortBy])
+
+
+    useEffect(() => {
+        if (filterBy) {
+        axios.get('http://localhost:3003/juvelyrika-filter/'+filterBy)
+            .then(res => {
+                setProducts(res.data);
+            })
+        }
+    }, [filterBy])
+
+
+    useEffect(() => {
+        if (searchBy) {
+        axios.get('http://localhost:3003/juvelyrika-product/?s='+searchBy)
+            .then(res => {
+                setProducts(res.data);
+            })
+        }
+    }, [searchBy])
+
+
+    useEffect(() => {
+    if (sortBy) {
+        setProducts(productSort(products, sortBy));
+    }
+}, [sortBy])
+
+const reset = () => {
+    setLastUpdate(Date.now());
+}
 
     return (
         <div className="product">
+            <ProductNav types={types} search={setSearchBy} filter={setFilterBy} sort={setSortBy} reset={reset}></ProductNav>
             <ProductsList products={products} modal={modal} remove={remove}></ProductsList>
             <Modal edit={edit} hide={hide} product={modalProduct} showModal={showModal}></Modal>
             <CreateModal create={create} hide={hideCreateModal} showModal={showCreateModal}></CreateModal>

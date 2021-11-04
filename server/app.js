@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3003
+const port = 3001
 const mysql = require('mysql')
 const cors = require('cors')
 app.use(cors())
