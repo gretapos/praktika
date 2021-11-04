@@ -77,7 +77,7 @@ function App() {
     const [sortBy, setSortBy] = useState('')
 
     useEffect(() => {
-        axios.get('http://localhost:3003/juvelyrika-product')
+        axios.get('http://localhost:3001/juvelyrika-product')
             .then(res => {
                 setTypes(res.data);
             })
@@ -93,7 +93,7 @@ function App() {
 
     useEffect(() => {
         if (filterBy) {
-        axios.get('http://localhost:3003/juvelyrika-filter/'+filterBy)
+        axios.get('http://localhost:3001/juvelyrika-filter/'+filterBy)
             .then(res => {
                 setProducts(res.data);
             })
@@ -103,7 +103,7 @@ function App() {
 
     useEffect(() => {
         if (searchBy) {
-        axios.get('http://localhost:3003/juvelyrika-product/?s='+searchBy)
+        axios.get('http://localhost:3001/juvelyrika-product/?s='+searchBy)
             .then(res => {
                 setProducts(res.data);
             })

@@ -102,6 +102,57 @@ app.delete('/juvelyrika/:id', (req, res) => {
     })
 })
 
+// Randa visus skirtingus tipus
+// SELECT DISTINCT column1, column2, ...
+// FROM table_name;
+app.get('/juvelyrika-product', (req, res) => {
+    const sql = `
+        SELECT DISTINCT product
+        FROM juvelyrika
+    `;
+    con.query(sql, (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+// rodo tik tam tikro tipo produktus
+app.get('/juvelyrika-filter/:t', (req, res) => {
+    const sql = `
+        SELECT *
+        FROM juvelyrika
+        WHERE product = ?
+    `;
+    con.query(sql, [req.params.t], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+// paieska pagal varda
+// SELECT column1, column2, ...
+// FROM table_name
+// WHERE columnN LIKE pattern;
+app.get('/juvelyrika-product', (req, res) => {
+    const sql = `
+        SELECT *
+        FROM juvelyrika
+        WHERE name LIKE ?
+    `;
+    con.query(sql, ['%' + req.query.s + '%'], (err, results) => {
+        if (err) {
+            throw err;
+        }
+        res.send(results);
+    })
+})
+
+
+
 app.listen(port, () => {
     // console.log(`Example app listening at http://localhost:${port}`)
 })
