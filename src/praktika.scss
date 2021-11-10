@@ -107,4 +107,35 @@
             width: 80vw;
         }
     }
+    &__stats {
+        padding: 20px;
+        color: ghostwhite;
+        span {
+            padding: 0 10px;
+        }
+        &__gstat {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            color: ghostwhite;
+            span {
+                padding: 5px;
+                margin: 5px;
+                border: 1px solid white;
+            }
+        }
+    }
+    &__msg {
+        background-color: grey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.6s;
+        overflow: hidden;
+        span {
+            padding: 5px;
+            margin: 5px;
+            color: tan;
+        }
+    }
 }

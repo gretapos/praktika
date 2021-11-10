@@ -25,6 +25,9 @@ function ProductNav({ types, filter, reset, search, sort }) {
     const resetHandler = () => {
         reset();
         setFilterValue('');
+        setSearchValue('');
+        setSortValue('');
+        sort('');
     }
 
     return (
@@ -35,8 +38,8 @@ function ProductNav({ types, filter, reset, search, sort }) {
                     <option value="">Select jewelery</option>
                     <option value="name_asc">By product - AZ</option>
                     <option value="name_desc">By product - ZA</option>
-                    <option value="weight_asc">By price - 19</option>
-                    <option value="weight_desc">By price - 91</option>
+                    <option value="price_asc">By price - 19</option>
+                    <option value="price_desc">By price - 91</option>
                 </select>
             </div>
             <div className="product__nav__filter">
